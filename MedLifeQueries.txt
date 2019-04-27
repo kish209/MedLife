@@ -1,0 +1,65 @@
+
+create table customer
+(
+cust_id varchar(55),
+cust_name varchar(55),
+contact BigInt,
+primary key (cust_id)
+);
+
+create table address
+(
+house_no varchar(55),
+house_area varchar(55),
+contact BigInt,
+pincode int(11),
+cust_f int,
+foreign key(cust_f) references customer(cust_id)
+);
+
+create table trade
+trade_id int(11),
+total_price float,
+trade_date date,
+primary key (trade_id)
+);
+
+
+create table medicine
+(
+medicine_name varchar(55),
+medicine_type varchar(55),
+medicine_price float,
+shop_id_f int,
+trade_id_f int,
+foreign key (shop_id_f) references shop(shop_id),
+foreign key (trade_id_f) references trade(trade_id)
+);
+
+create table shop
+(
+shop_id int(11),
+shop_name varchar(55),
+primary key(shop_id)
+);
+
+alter table shop add primary key(shop_id);
+
+alter table address foreign key (shop_id_f) references shop(shop_id);
+
+
+create table address
+(
+house_no varchar(55),
+house_area varchar(55),
+contact BigInt,
+pincode int(11),
+cust_f varchar(55),
+shop_id_f int,
+foreign key(cust_f) references customer(cust_id),
+foreign key(shop_id_f) references shop(shop_id)
+);
+
+
+alter table customer add foreign key(trade_id_f) references trade(trade_id);
+alter table customer add (trade_id_f int);
